@@ -5,9 +5,18 @@ internal class Program
     private static void Main(string[] args)
     {
         Random rng = new Random();
-        dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(@"Lib.json"))!;
+        string parola="";
+        try
+        {
+            dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(@"Lib.json"))!;
+            parola = json[rng.Next(0, json.Count - 1)].Parola;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Errore: {ex.Message}");
+        }
+        
         Console.Clear();
-        string parola = json[rng.Next(0, json.Count - 1)].Parola;
         if (args.Length != 0 && args[0] == "-d") Console.WriteLine(parola);
         string lettereTrovate = "";
         int tentativi=0;
