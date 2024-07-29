@@ -15,7 +15,7 @@ internal class Program
         {
             Console.WriteLine($"Errore: {ex.Message}");
         }
-        
+
         Console.Clear();
         if (args.Length != 0 && args[0] == "-d") Console.WriteLine(parola);
         string lettereTrovate = "";
