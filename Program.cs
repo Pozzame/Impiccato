@@ -8,7 +8,9 @@ internal class Program
         dynamic json = JsonConvert.DeserializeObject(File.ReadAllText(@"Lib.json"))!;
         Console.Clear();
         string parola = json[rng.Next(0, json.Count - 1)].Parola;
+        if (args.Length != 0 && args[0] == "-d") Console.WriteLine(parola);
         string lettereTrovate = "";
+        int tentativi=0;
         while (true)
         {
             Console.WriteLine("---Indovina la parola---");
@@ -17,6 +19,7 @@ internal class Program
                 if (lettereTrovate.Contains(carattere)) Console.Write(carattere); else Console.Write("_");
             Console.WriteLine();
             string tryParola = Console.ReadLine()!.ToLower();
+            tentativi++;
             if (parola == tryParola) break;
             Console.WriteLine("Parola errata.");
             Console.WriteLine("Prova una lettera...");
@@ -30,6 +33,6 @@ internal class Program
             else
                 Console.WriteLine("Non presente.");
         }
-        Console.WriteLine("Hai vinto!!");
+        Console.WriteLine($"Hai vinto in {tentativi} tentativi!!");
     }
 }
